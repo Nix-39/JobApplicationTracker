@@ -1,6 +1,6 @@
 ﻿namespace JobApplicationTracker
 {
-    // Representerar en jobansökan
+    // Representerar en jobbansökan
     public class JobApplication
     {
         // Attribut för att lagra företagets namn
@@ -21,6 +21,19 @@
             SalaryExpectation = salaryExpectation;
             Status = Status.Applied; // Standardstatus är "Applied"
             ResponseDate = null; // Ingen respons ännu
+        }
+        // Returnerar antal dagar sedan ansökan skickades
+        public int GetDaysSinceApplied()
+        {
+            TimeSpan difference = DateTime.Now - ApplicationDate;
+            return difference.Days;
+        }
+        // Returnerar en kort sammanfattning av ansökan som text
+        public string GetSummary()
+        {
+            return $"{CompanyName} - {Position} | Status: {Status} | " + 
+                   $"Sökt: {ApplicationDate: yyyy-MM-dd} ({GetDaysSinceApplied()} dagar sedan) |" +
+                   $"Lön: {SalaryExpectation:N0} kr"; 
         }
     }
 }
