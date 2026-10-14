@@ -18,4 +18,17 @@ public class JobApplication
         SalaryExpectation = salaryExpectation;
         ApplicationDate = applicationDate;
     }
+
+    // Metod för att räkna ut antal dagar som gått sedan ansökan skickades in
+    public int GetDaysSinceApplied()
+    {
+        return (DateTime.Now - ApplicationDate).Days;
+    }
+
+    // Metod för att returnera en sammanfattning av ansökan
+    public string GetSummary()
+    {
+        return $"{CompanyName} - {PositionTitle} | {Status} | Sökt: {ApplicationDate:yyyy-MM-dd} ({GetDaysSinceApplied()} dagar sedan) | Lön: {SalaryExpectation:N0} kr";
+    }
+
 }
