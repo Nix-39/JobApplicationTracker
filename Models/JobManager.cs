@@ -27,7 +27,7 @@ namespace JobApplicationTracker.Models
             }
         }
 
-        // Ändrar status för en ansökan men reutrnerar false om företaget inte finns
+        // Ändrar status för en ansökan men reutrnerar false om företaget inte finns med i listan
         public bool UpdateStatus(string companyName, Status newStatus)
         {
             var job = Applications.Find(a => a.CompanyName == companyName);
@@ -41,11 +41,33 @@ namespace JobApplicationTracker.Models
             return true;
         }
 
-        // Tar bort en ansökan men returnerar false om företaget inte finns
+        // Tar bort en ansökan men returnerar false om företaget inte finns med i listan
         public bool RemoveJob(string companyName)
 
         {
             return Applications.RemoveAll(a => a.CompanyName == companyName) > 0;
+        }
+
+        // LINQ Where: Visar ansökningar med en vald status
+        public void ShowByStatus(Status status)
+        {
+            var filtered = Applications.Where(a => a.Status == status);
+
+            foreach (var job in filtered)
+            {
+                Console.WriteLine(job.GetSummary());
+            }
+        }
+
+        // LINQ OrderBy: Sorterar ansökningar efter datum med äldsta först
+        public void ShowSortedByDate()
+        {
+            var sorted = Applications.OrderBy(a => a.ApplicationDate);
+
+            foreach (var job in sorted)
+            {
+                Console.WriteLine(job.GetSummary());
+            }
         }
     }
 }
