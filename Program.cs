@@ -32,6 +32,10 @@ while (running)
             Console.WriteLine("Ansökan tillagd!");
             break;
 
+        case "2":
+            manager.ShowAll();
+            break;
+
 
         case "0":
             running = false;
