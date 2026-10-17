@@ -69,5 +69,29 @@ namespace JobApplicationTracker.Models
                 Console.WriteLine(job.GetSummary());
             }
         }
+
+        // LINQ Count, GroupBy och Average: Visar statistik över ansökningar per status
+        public void ShowStatistics()
+        {
+            Console.WriteLine($"Totalt antal ansökningar: {Applications.Count()}");
+
+            foreach (var group in Applications.GroupBy(a => a.Status))
+            {
+                Console.WriteLine($"Status: {group.Key}, Antal: {group.Count()}");
+            }
+
+            var avg = Applications
+                .Where(a => a.ResponseDate != null)
+                .Average(a => (a.ResponseDate - a.ApplicationDate)?.TotalDays);
+
+            if (avg == null)
+            {
+                Console.WriteLine("Inga svarade ansökningar för att beräkna genomsnittlig svarstid.");
+            }
+            else
+            {
+                Console.WriteLine($"Genomsnittlig svarstid: {avg:F1} dagar");
+            }
+        }
     }
 }
