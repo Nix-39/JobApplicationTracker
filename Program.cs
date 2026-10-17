@@ -19,6 +19,20 @@ while (running)
 
     switch (Console.ReadLine())
     {
+        case "1":
+            Console.Write("Företag: ");
+            var company = Console.ReadLine();
+            Console.Write("Befattning: ");
+            var title = Console.ReadLine();
+            Console.Write("Önskad lön: ");
+            var salary = int.Parse(Console.ReadLine());
+            Console.Write("Datum (yyyy-MM-dd): ");
+            var date = DateTime.Parse(Console.ReadLine());
+            manager.AddJob(new JobApplication(company, title, salary, date));
+            Console.WriteLine("Ansökan tillagd!");
+            break;
+
+
         case "0":
             running = false;
             Console.WriteLine("Hej då!");
