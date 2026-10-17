@@ -26,5 +26,26 @@ namespace JobApplicationTracker.Models
                 Console.WriteLine(job.GetSummary());
             }
         }
+
+        // Ändrar status för en ansökan men reutrnerar false om företaget inte finns
+        public bool UpdateStatus(string companyName, Status newStatus)
+        {
+            var job = Applications.Find(a => a.CompanyName == companyName);
+            if (job == null)
+            {
+                return false;
+            }
+            job.Status = newStatus;
+            job.ResponseDate = DateTime.Now;
+        
+            return true;
+        }
+
+        // Tar bort en ansökan men returnerar false om företaget inte finns
+        public bool RemoveJob(string companyName)
+
+        {
+            return Applications.RemoveAll(a => a.CompanyName == companyName) > 0;
+        }
     }
 }
