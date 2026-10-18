@@ -25,10 +25,21 @@ while (running)
             var company = Console.ReadLine();
             Console.Write("Befattning: ");
             var title = Console.ReadLine();
+
             Console.Write("Önskad lön: ");
-            var salary = int.Parse(Console.ReadLine());
+            int salary;
+            while (!int.TryParse(Console.ReadLine(), out salary))
+            {
+                Console.Write("Ogiltig lön. Försök igen: ");
+            }
+
             Console.Write("Datum (yyyy-MM-dd): ");
-            var date = DateTime.Parse(Console.ReadLine());
+            DateTime date;
+            while (!DateTime.TryParse(Console.ReadLine(), out date))
+            {
+                Console.Write("Ogiltigt datum. Försök igen: ");
+            }
+
             manager.AddJob(new JobApplication(company, title, salary, date));
             Console.WriteLine("Ansökan tillagd!");
             break;
