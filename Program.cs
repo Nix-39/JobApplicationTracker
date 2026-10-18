@@ -42,6 +42,12 @@ while (running)
             manager.ShowByStatus(filterStatus);
             break;
 
+        case "4":
+            manager.ShowSortedByDate();
+            break;
+
+
+
 
 
         case "0":
