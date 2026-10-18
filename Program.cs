@@ -50,7 +50,11 @@ while (running)
 
         case "3":
             Console.Write("Status (Applied, Interview, Offer, Rejected): ");
-            var filterStatus = Enum.Parse<Status>(Console.ReadLine(), true);
+            Status filterStatus;
+            while (!Enum.TryParse(Console.ReadLine(), true, out filterStatus))
+            {
+                Console.Write("Ogiltig status. Försök igen: ");
+            }
             manager.ShowByStatus(filterStatus);
             break;
 
@@ -66,7 +70,11 @@ while (running)
             Console.Write("Företag: ");
             var updateCompany = Console.ReadLine();
             Console.Write("Ny status (Applied, Interview, Offer, Rejected): ");
-            var newStatus = Enum.Parse<Status>(Console.ReadLine(), true);
+            Status newStatus;
+            while (!Enum.TryParse(Console.ReadLine(), true, out newStatus))
+            {
+                Console.Write("Ogiltig status. Försök igen: ");
+            }
             if (manager.UpdateStatus(updateCompany, newStatus))
             {
                 Console.WriteLine("Status uppdaterad!");
