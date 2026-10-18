@@ -36,6 +36,13 @@ while (running)
             manager.ShowAll();
             break;
 
+        case "3":
+            Console.Write("Status (Applied, Interview, Offer, Rejected): ");
+            var filterStatus = Enum.Parse<Status>(Console.ReadLine(), true);
+            manager.ShowByStatus(filterStatus);
+            break;
+
+
 
         case "0":
             running = false;
