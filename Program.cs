@@ -50,6 +50,21 @@ while (running)
             manager.ShowStatistics();
             break;
 
+        case "6":
+            Console.Write("Företag: ");
+            var updateCompany = Console.ReadLine();
+            Console.Write("Ny status (Applied, Interview, Offer, Rejected): ");
+            var newStatus = Enum.Parse<Status>(Console.ReadLine(), true);
+            if (manager.UpdateStatus(updateCompany, newStatus))
+            {
+                Console.WriteLine("Status uppdaterad!");
+            }
+            else
+            {
+                Console.WriteLine("Ansökan hittades inte.");
+            }
+            break;
+
 
 
 
