@@ -1,0 +1,12 @@
+# Reflektion Robin Boqvist
+
+* 1. Hur hjälpte LINQ mig att skriva renare kod? *
+
+Genom att använda LINQ kunde jag skriva kod som blir mer läsbar och enklare att förstå, det ger användaren möjlighet att sortera, filtrera och räkna ut statistik på en rad kod.
+Alternativet hade varit att skriva if-satser, listor och loopar för att uppnå samma resultat, vilket hade gjort koden mer komplex och svår att underhålla.
+
+* 2. Vilken del av projektet var mest utmanande och hur löste jag det? *
+
+För mig är fortfarande helheten utmanande så jag har tagit mycket hjälp av AI och läst undervisningsmaterial för att få en fungerande kod för uppgiften.
+Under tiden lär jag mig vad varje del gör och inlärningen går framåt. 
+Tekniskt sett så var det svåraste att räkna ut genomsnittlig svarstid, då ResponseDate kan vara null behövde jag lösa det genom att filtrera med 'Where' så bara ansökningar som fått svar blir synliga och räknas med.
