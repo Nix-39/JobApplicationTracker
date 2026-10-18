@@ -61,12 +61,21 @@ while (running)
             }
             else
             {
-                Console.WriteLine("Ansökan hittades inte.");
+                Console.WriteLine("Hittade inget företag med det namnet.");
             }
             break;
 
-
-
+        case "7":
+            Console.Write("Företag att ta bort: ");
+            if (manager.RemoveJob(Console.ReadLine()))
+            {
+                Console.WriteLine("Ansökan borttagen!");
+            }
+            else
+            {
+                Console.WriteLine("Hittade inget företag med det namnet.");
+            }
+            break;
 
         case "0":
             running = false;
