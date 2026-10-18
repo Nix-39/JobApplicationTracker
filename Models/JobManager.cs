@@ -93,5 +93,15 @@ namespace JobApplicationTracker.Models
                 Console.WriteLine($"Genomsnittlig svarstid: {avg:F1} dagar");
             }
         }
+
+        // LINQ Where: Filtrerar ansökningar utan de som är äldre än 14 dagar
+        public void ShowUnanswered()
+        {
+            var unanswered = Applications.Where(a => a.ResponseDate == null && a.GetDaysSinceApplied() > 14);
+            foreach (var job in unanswered)
+            {
+                Console.WriteLine(job.GetSummary());
+            }
+        }
     }
 }

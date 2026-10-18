@@ -14,6 +14,7 @@ while (running)
     Console.WriteLine("5. Visa statistik");
     Console.WriteLine("6. Uppdatera status för ansökan");
     Console.WriteLine("7. Ta bort en ansökan");
+    Console.WriteLine("8. Visa ansökningar utan svar (äldre än 14 dagar)");
     Console.WriteLine("0. Avsluta");
     Console.Write("Välj: ");
 
@@ -75,6 +76,10 @@ while (running)
             {
                 Console.WriteLine("Hittade inget företag med det namnet.");
             }
+            break;
+
+        case "8":
+            manager.ShowUnanswered();
             break;
 
         case "0":
