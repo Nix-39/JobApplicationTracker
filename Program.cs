@@ -14,6 +14,7 @@ while (running)
     Console.WriteLine("5. Visa statistik");
     Console.WriteLine("6. Uppdatera status för ansökan");
     Console.WriteLine("7. Ta bort en ansökan");
+    Console.WriteLine("8. Visa ansökningar utan svar (äldre än 14 dagar)");
     Console.WriteLine("0. Avsluta");
     Console.Write("Välj: ");
 
@@ -24,10 +25,21 @@ while (running)
             var company = Console.ReadLine();
             Console.Write("Befattning: ");
             var title = Console.ReadLine();
+
             Console.Write("Önskad lön: ");
-            var salary = int.Parse(Console.ReadLine());
+            int salary;
+            while (!int.TryParse(Console.ReadLine(), out salary))
+            {
+                Console.Write("Ogiltig lön. Försök igen: ");
+            }
+
             Console.Write("Datum (yyyy-MM-dd): ");
-            var date = DateTime.Parse(Console.ReadLine());
+            DateTime date;
+            while (!DateTime.TryParse(Console.ReadLine(), out date))
+            {
+                Console.Write("Ogiltigt datum. Försök igen: ");
+            }
+
             manager.AddJob(new JobApplication(company, title, salary, date));
             Console.WriteLine("Ansökan tillagd!");
             break;
@@ -38,7 +50,11 @@ while (running)
 
         case "3":
             Console.Write("Status (Applied, Interview, Offer, Rejected): ");
-            var filterStatus = Enum.Parse<Status>(Console.ReadLine(), true);
+            Status filterStatus;
+            while (!Enum.TryParse(Console.ReadLine(), true, out filterStatus))
+            {
+                Console.Write("Ogiltig status. Försök igen: ");
+            }
             manager.ShowByStatus(filterStatus);
             break;
 
@@ -54,7 +70,11 @@ while (running)
             Console.Write("Företag: ");
             var updateCompany = Console.ReadLine();
             Console.Write("Ny status (Applied, Interview, Offer, Rejected): ");
-            var newStatus = Enum.Parse<Status>(Console.ReadLine(), true);
+            Status newStatus;
+            while (!Enum.TryParse(Console.ReadLine(), true, out newStatus))
+            {
+                Console.Write("Ogiltig status. Försök igen: ");
+            }
             if (manager.UpdateStatus(updateCompany, newStatus))
             {
                 Console.WriteLine("Status uppdaterad!");
@@ -75,6 +95,10 @@ while (running)
             {
                 Console.WriteLine("Hittade inget företag med det namnet.");
             }
+            break;
+
+        case "8":
+            manager.ShowUnanswered();
             break;
 
         case "0":

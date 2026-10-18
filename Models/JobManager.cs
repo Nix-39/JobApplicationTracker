@@ -23,7 +23,7 @@ namespace JobApplicationTracker.Models
 
             foreach (var job in Applications)
             {
-                Console.WriteLine(job.GetSummary());
+                PrintJob(job);
             }
         }
 
@@ -31,10 +31,12 @@ namespace JobApplicationTracker.Models
         public bool UpdateStatus(string companyName, Status newStatus)
         {
             var job = Applications.Find(a => a.CompanyName == companyName);
+
             if (job == null)
             {
                 return false;
             }
+
             job.Status = newStatus;
             job.ResponseDate = DateTime.Now;
         
@@ -55,7 +57,7 @@ namespace JobApplicationTracker.Models
 
             foreach (var job in filtered)
             {
-                Console.WriteLine(job.GetSummary());
+                PrintJob(job);
             }
         }
 
@@ -66,7 +68,7 @@ namespace JobApplicationTracker.Models
 
             foreach (var job in sorted)
             {
-                Console.WriteLine(job.GetSummary());
+                PrintJob(job);
             }
         }
 
@@ -86,12 +88,39 @@ namespace JobApplicationTracker.Models
 
             if (avg == null)
             {
-                Console.WriteLine("Inga svarade ansökningar för att beräkna genomsnittlig svarstid.");
+                Console.WriteLine("Genomsnittlig svarstid: Inga svar ännu");
             }
             else
             {
                 Console.WriteLine($"Genomsnittlig svarstid: {avg:F1} dagar");
             }
+        }
+
+        // LINQ Where: Filtrerar ansökningar utan de som är äldre än 14 dagar
+        public void ShowUnanswered()
+        {
+            var unanswered = Applications.Where(a => a.ResponseDate == null && a.GetDaysSinceApplied() > 14);
+            
+            foreach (var job in unanswered)
+            {
+                PrintJob(job);
+            }
+        }
+
+        // Skriver ut en ansökan i färg efter status
+        private static void PrintJob(JobApplication job)
+        {
+            Console.ForegroundColor = job.Status switch
+            {
+                Status.Applied => ConsoleColor.Yellow,
+                Status.Interview => ConsoleColor.Blue,
+                Status.Offer => ConsoleColor.Green,
+                Status.Rejected => ConsoleColor.Red,
+                _ => ConsoleColor.Gray
+            };
+
+            Console.WriteLine(job.GetSummary());
+            Console.ResetColor();
         }
     }
 }
