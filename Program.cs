@@ -46,6 +46,9 @@ while (running)
             manager.ShowSortedByDate();
             break;
 
+        case "5":
+            manager.ShowStatistics();
+            break;
 
 
 
